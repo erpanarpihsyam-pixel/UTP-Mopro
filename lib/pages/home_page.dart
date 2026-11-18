@@ -143,15 +143,12 @@ class _HomePageState extends State<HomePage> {
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
               onRefresh: _muatData,
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 620),
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     // Kartu Statistik / Ringkasan Jurnal
                     _buildStatistikCard(),
                     const SizedBox(height: 16),
@@ -282,8 +279,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ),
-        ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.brown.shade800,
         foregroundColor: Colors.white,

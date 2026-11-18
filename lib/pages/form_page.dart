@@ -173,12 +173,9 @@ class _FormPageState extends State<FormPage> {
       appBar: AppBar(
         title: Text(_isEditMode ? 'Edit Catatan Seduh' : 'Catat Seduhan Baru'),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 620),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,10 +543,8 @@ class _FormPageState extends State<FormPage> {
           ),
         ),
       ),
-    ),
-  ),
-);
-}
+    );
+  }
 
   Widget _buildSectionTitle(String title) {
     return Text(

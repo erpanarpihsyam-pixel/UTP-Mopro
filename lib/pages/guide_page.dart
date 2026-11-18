@@ -63,17 +63,12 @@ class _GuidePageState extends State<GuidePage> with SingleTickerProviderStateMix
           ],
         ),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 650),
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              _buildKalkulatorTab(),
-              _buildPanduanMetodeTab(),
-            ],
-          ),
-        ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _buildKalkulatorTab(),
+          _buildPanduanMetodeTab(),
+        ],
       ),
     );
   }

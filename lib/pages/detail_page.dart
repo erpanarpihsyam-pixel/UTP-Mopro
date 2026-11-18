@@ -131,14 +131,11 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 620),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             // Kartu Header Biji Kopi
             Container(
               width: double.infinity,
@@ -249,49 +246,54 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             const SizedBox(height: 10),
-            GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisExtent: 64, // Tinggi tetap 64 agar kotak normal dan tidak membesar
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              children: [
-                _buildParamTile(
-                  icon: Icons.scale_rounded,
-                  label: 'Rasio Seduh',
-                  value: _seduhAktif.rasio,
-                ),
-                _buildParamTile(
-                  icon: Icons.grain_rounded,
-                  label: 'Berat Kopi',
-                  value: '${_seduhAktif.beratKopi.toStringAsFixed(0)} gram',
-                ),
-                _buildParamTile(
-                  icon: Icons.water_drop_rounded,
-                  label: 'Jumlah Air',
-                  value: '${_seduhAktif.jumlahAir.toStringAsFixed(0)} ml',
-                ),
-                _buildParamTile(
-                  icon: Icons.thermostat_rounded,
-                  label: 'Suhu Air',
-                  value: '${_seduhAktif.suhuAir} °C',
-                ),
-                _buildParamTile(
-                  icon: Icons.timer_outlined,
-                  label: 'Waktu Seduh',
-                  value: _seduhAktif.waktuSeduh.isNotEmpty
-                      ? _seduhAktif.waktuSeduh
-                      : '-',
-                ),
-                _buildParamTile(
-                  icon: Icons.tune_rounded,
-                  label: 'Gilingan (Grind)',
-                  value: _seduhAktif.grindSize,
-                ),
-              ],
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final int jumlahKolom = constraints.maxWidth > 700 ? 3 : 2;
+                return GridView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: jumlahKolom,
+                    mainAxisExtent: 64,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  children: [
+                    _buildParamTile(
+                      icon: Icons.scale_rounded,
+                      label: 'Rasio Seduh',
+                      value: _seduhAktif.rasio,
+                    ),
+                    _buildParamTile(
+                      icon: Icons.grain_rounded,
+                      label: 'Berat Kopi',
+                      value: '${_seduhAktif.beratKopi.toStringAsFixed(0)} gram',
+                    ),
+                    _buildParamTile(
+                      icon: Icons.water_drop_rounded,
+                      label: 'Jumlah Air',
+                      value: '${_seduhAktif.jumlahAir.toStringAsFixed(0)} ml',
+                    ),
+                    _buildParamTile(
+                      icon: Icons.thermostat_rounded,
+                      label: 'Suhu Air',
+                      value: '${_seduhAktif.suhuAir} °C',
+                    ),
+                    _buildParamTile(
+                      icon: Icons.timer_outlined,
+                      label: 'Waktu Seduh',
+                      value: _seduhAktif.waktuSeduh.isNotEmpty
+                          ? _seduhAktif.waktuSeduh
+                          : '-',
+                    ),
+                    _buildParamTile(
+                      icon: Icons.tune_rounded,
+                      label: 'Gilingan (Grind)',
+                      value: _seduhAktif.grindSize,
+                    ),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 16),
 
@@ -399,10 +401,8 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       ),
-    ),
-  ),
-);
-}
+    );
+  }
 
 Widget _buildParamTile({
   required IconData icon,
