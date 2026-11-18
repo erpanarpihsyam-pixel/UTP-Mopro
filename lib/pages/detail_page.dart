@@ -131,11 +131,14 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 620),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             // Kartu Header Biji Kopi
             Container(
               width: double.infinity,
@@ -236,7 +239,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
             const SizedBox(height: 16),
 
-            // Grid Parameter Seduh
+            // Grid Parameter Seduh (Ukuran normal dan proporsional)
             const Text(
               'Parameter Seduhan',
               style: TextStyle(
@@ -246,13 +249,15 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             const SizedBox(height: 10),
-            GridView.count(
+            GridView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              childAspectRatio: 2.1,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisExtent: 64, // Tinggi tetap 64 agar kotak normal dan tidak membesar
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
               children: [
                 _buildParamTile(
                   icon: Icons.scale_rounded,
@@ -394,55 +399,69 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  ),
+);
+}
 
-  Widget _buildParamTile({
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.brown.shade100),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.brown.shade50,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(icon, size: 20, color: Colors.brown.shade700),
+Widget _buildParamTile({
+  required IconData icon,
+  required String label,
+  required String value,
+}) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: Colors.brown.shade100),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.brown.withValues(alpha: 0.05),
+          blurRadius: 4,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(7),
+          decoration: BoxDecoration(
+            color: Colors.brown.shade50,
+            borderRadius: BorderRadius.circular(8),
           ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+          child: Icon(icon, size: 18, color: Colors.brown.shade700),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 10.5,
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.w500,
                 ),
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C1810),
-                  ),
-                  overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2C1810),
                 ),
-              ],
-            ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }

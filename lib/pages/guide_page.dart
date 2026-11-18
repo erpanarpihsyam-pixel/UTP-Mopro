@@ -63,12 +63,17 @@ class _GuidePageState extends State<GuidePage> with SingleTickerProviderStateMix
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildKalkulatorTab(),
-          _buildPanduanMetodeTab(),
-        ],
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 650),
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildKalkulatorTab(),
+              _buildPanduanMetodeTab(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -210,9 +215,6 @@ class _GuidePageState extends State<GuidePage> with SingleTickerProviderStateMix
             ),
           ),
           const SizedBox(height: 24),
-
-          // Info Proyek Mahasiswa di Bawah
-          _buildInfoMahasiswa(),
         ],
       ),
     );
@@ -340,8 +342,7 @@ class _GuidePageState extends State<GuidePage> with SingleTickerProviderStateMix
               '3. Seduh kopi menggunakan sisa air panas (~150ml).\n'
               '4. Kopi yang menetes panas akan langsung didinginkan es, mengunci aroma cerah & rasa manis buah.',
         ),
-        const SizedBox(height: 20),
-        _buildInfoMahasiswa(),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -445,46 +446,6 @@ class _GuidePageState extends State<GuidePage> with SingleTickerProviderStateMix
           ),
         ),
       ],
-    );
-  }
-
-  // Info Mahasiswa Praktikum
-  Widget _buildInfoMahasiswa() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.info_outline_rounded, color: Colors.brown, size: 18),
-              SizedBox(width: 8),
-              Text(
-                'Informasi Proyek UTP',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2C1810),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Mata Kuliah: Praktikum Mobile Programming\n'
-            'Nama: Ervan Arpihsyam\n'
-            'Opsi: Opsi 1 (Local Storage - SharedPreferences)\n'
-            'Aplikasi: SeduhKopi (Manual Brew Coffee Journal)',
-            style: TextStyle(fontSize: 12, color: Colors.black87, height: 1.4),
-          ),
-        ],
-      ),
     );
   }
 }
