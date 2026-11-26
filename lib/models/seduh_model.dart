@@ -37,7 +37,7 @@ class SeduhModel {
   }
 
   // Mengubah objek SeduhModel ke format Map (JSON) untuk disimpan ke SharedPreferences
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'namaKopi': namaKopi,
@@ -55,22 +55,28 @@ class SeduhModel {
     };
   }
 
-  // Mengonversi data Map (JSON) dari SharedPreferences kembali menjadi objek SeduhModel
-  factory SeduhModel.fromMap(Map<String, dynamic> map) {
+  // Alias toMap untuk kompatibilitas
+  Map<String, dynamic> toMap() => toJson();
+
+  // Mengonversi data Map (JSON) dari SharedPreferences atau file JSON kembali menjadi objek SeduhModel
+  factory SeduhModel.fromJson(Map<String, dynamic> json) {
     return SeduhModel(
-      id: map['id'] ?? '',
-      namaKopi: map['namaKopi'] ?? '',
-      origin: map['origin'] ?? '',
-      metode: map['metode'] ?? 'V60',
-      grindSize: map['grindSize'] ?? 'Medium',
-      beratKopi: (map['beratKopi'] is num) ? (map['beratKopi'] as num).toDouble() : 0.0,
-      jumlahAir: (map['jumlahAir'] is num) ? (map['jumlahAir'] as num).toDouble() : 0.0,
-      suhuAir: (map['suhuAir'] is num) ? (map['suhuAir'] as num).toInt() : 90,
-      waktuSeduh: map['waktuSeduh'] ?? '02:30',
-      flavorNotes: map['flavorNotes'] ?? '',
-      rating: (map['rating'] is num) ? (map['rating'] as num).toDouble() : 4.0,
-      catatan: map['catatan'] ?? '',
-      tanggal: map['tanggal'] ?? '',
+      id: json['id'] ?? '',
+      namaKopi: json['namaKopi'] ?? '',
+      origin: json['origin'] ?? '',
+      metode: json['metode'] ?? 'V60',
+      grindSize: json['grindSize'] ?? 'Medium',
+      beratKopi: (json['beratKopi'] is num) ? (json['beratKopi'] as num).toDouble() : 0.0,
+      jumlahAir: (json['jumlahAir'] is num) ? (json['jumlahAir'] as num).toDouble() : 0.0,
+      suhuAir: (json['suhuAir'] is num) ? (json['suhuAir'] as num).toInt() : 90,
+      waktuSeduh: json['waktuSeduh'] ?? '02:30',
+      flavorNotes: json['flavorNotes'] ?? '',
+      rating: (json['rating'] is num) ? (json['rating'] as num).toDouble() : 4.0,
+      catatan: json['catatan'] ?? '',
+      tanggal: json['tanggal'] ?? '',
     );
   }
+
+  // Alias fromMap untuk kompatibilitas
+  factory SeduhModel.fromMap(Map<String, dynamic> map) => SeduhModel.fromJson(map);
 }

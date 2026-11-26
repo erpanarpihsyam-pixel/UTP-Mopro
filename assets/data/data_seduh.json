@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "namaKopi": "Gayo Wine Process",
+    "origin": "Takengon, Aceh",
+    "metode": "V60",
+    "grindSize": "Medium-Fine",
+    "beratKopi": 15.0,
+    "jumlahAir": 225.0,
+    "suhuAir": 92,
+    "waktuSeduh": "02:45",
+    "flavorNotes": "Anggur Merah, Nanas, Manis Karamel",
+    "rating": 4.8,
+    "catatan": "Gunakan rasio 1:15 dengan 3x pouring. Bloom 45ml selama 40 detik, lalu tuang melingkar stabil. Keasaman winey sangat terasa dan clean.",
+    "tanggal": "16 Nov 2026"
+  },
+  {
+    "id": "2",
+    "namaKopi": "Toraja Sapan Washed",
+    "origin": "Tana Toraja, Sulawesi",
+    "metode": "French Press",
+    "grindSize": "Coarse",
+    "beratKopi": 18.0,
+    "jumlahAir": 270.0,
+    "suhuAir": 94,
+    "waktuSeduh": "04:00",
+    "flavorNotes": "Dark Chocolate, Rempah, Earthy",
+    "rating": 4.5,
+    "catatan": "Seduh selama 4 menit, aduk perlahan di menit ke-1, lalu plunge perlahan. Karakter body tebal dan aftertaste rempah hangat yang tahan lama.",
+    "tanggal": "17 Nov 2026"
+  }
+]
